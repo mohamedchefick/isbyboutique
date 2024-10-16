@@ -16,11 +16,11 @@
 
         <!-- Menu (grands écrans) -->
         <div class="hidden md:flex items-center gap-5 md:-mt-6">
-            <a href="" class="relative group">
+            <a href="/" class="relative group">
                 HOME
                 <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
             </a>
-            <a href="" class="relative group">
+            <a href="/articles" class="relative group">
                 ARRIVAL
                 <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
             </a>

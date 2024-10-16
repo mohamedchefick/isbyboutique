@@ -7,7 +7,6 @@
       </div>
     </div>
   </template>
-  
   <script setup>
   import { onMounted } from 'vue';
   import { gsap } from 'gsap';
@@ -49,6 +48,13 @@
       });
     });
   });
+  </script>
+  
+  <script>
+  // Ajouter le nom du composant ici
+  export default {
+    name: 'ThePartenaire',  // Utilise camelCase ou kebab-case, selon ta préférence
+  };
   </script>
   
   <style scoped>

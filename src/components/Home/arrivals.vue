@@ -1,4 +1,5 @@
 <template>
+<router-link to="/details">
     <div class="arrivals-container mx-5 my-10" ref="arrivalsContainer">
         <h2 class="text-center text-3xl font-bold mb-8">Nouvelles Arrivées</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -22,22 +23,23 @@
                         </p>
                     </div>
 
-                    <!-- Bouton flèche -->
-                    <button class="bg-[#da9a90] text-white px-4 py-2 rounded-lg transition-transform hover:bg-[#814255] hover:scale-105">
-                        &rarr;
-                    </button>
+                        <button class="bg-[#da9a90] text-white px-4 py-2 rounded-lg transition-transform hover:bg-[#814255] hover:scale-105">
+                            &rarr;
+                        </button>
                 </div>
             </div>
         </div>
     </div>
+</router-link>
+
 </template>
 
 <script>
 import { gsap } from "gsap"; // Importer GSAP
 import { ScrollTrigger } from "gsap/ScrollTrigger"; // Importer ScrollTrigger
-import arrival1 from '../../../images/arrival1.png';
-import arrival2 from '../../../images/arrival2.png';
-import arrival3 from '../../../images/arrival3.png';
+import arrival1 from '../../images/arrival1.png';
+import arrival2 from '../../images/arrival2.png';
+import arrival3 from '../../images/arrival3.png';
 
 gsap.registerPlugin(ScrollTrigger); // Enregistrer ScrollTrigger
 

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import IMGHero from '../../../images/hero.jpeg';
+import IMGHero from '../../images/hero.jpeg';
 
 export default {
     name: 'the-hero',
