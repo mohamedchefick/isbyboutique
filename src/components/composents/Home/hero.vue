@@ -6,7 +6,7 @@
             <span class="border-b-2 border-black">LA BOUTIQUE CHINE</span>
             <br>
             <span class="bg-[#da9a90] px-2 py-1 inline-block mt-2">
-                LET’S EXPLORE UNIQUE CLOTHES.
+                LET'S EXPLORE UNIQUE CLOTHES.
             </span>
         </div>
     </div>
