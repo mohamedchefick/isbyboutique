@@ -78,7 +78,7 @@ const selectProduct = (p) => {
 // Formatage prix
 const formatPrice = (p) => (typeof p === 'number' ? p.toFixed(2) + ' €' : p)
 
-// Récupération produits
+// Récupération produit
 onMounted(() => {
     const q = query(collection(db, 'products'), orderBy('createdAt', 'desc'))
     onSnapshot(q, (snapshot) => {
