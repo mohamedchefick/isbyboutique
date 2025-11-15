@@ -14,11 +14,11 @@
         </div>
         <!-- Menu (grands écrans) -->
         <div class="hidden md:flex items-center gap-5 md:-mt-6">
-            <a href="" class="relative group">
+            <RouterLink to="/" class="relative group">
                 HOME
                 <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a href="" class="relative group">
+            </RouterLink>
+            <!-- <a href="" class="relative group">
                 ARRIVAL
                 <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
             </a>
@@ -29,7 +29,7 @@
             <a href="" class="relative group">
                 LIFESTYLE
                 <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
-            </a>
+            </a> -->
             <RouterLink to="/panier" class="relative group flex items-center gap-1">
                 PANIER
                 <span v-if="cartStore.cart.length > 0" class="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -44,11 +44,11 @@
         <!-- Menu déroulant (petits écrans) -->
         <div v-if="menuOpen" class="md:hidden absolute top-16 left-0 w-full bg-white shadow-lg z-50">
             <div class="flex flex-col items-center gap-3 py-4">
-                <a href="" class="w-full text-center py-2 relative group">
+                <RouterLink to="/" class="w-full text-center py-2 relative group">
                     HOME
                     <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="" class="w-full text-center py-2 relative group">
+                </RouterLink>
+                <!-- <a href="" class="w-full text-center py-2 relative group">
                     ARRIVAL
                     <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
                 </a>
@@ -59,7 +59,7 @@
                 <a href="" class="w-full text-center py-2 relative group">
                     LIFESTYLE
                     <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
-                </a>
+                </a> -->
                 <RouterLink to="/panier" class="w-full text-center py-2 relative group flex items-center justify-center gap-1">
                     PANIER
                     <span v-if="cartStore.cart.length > 0" class="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
