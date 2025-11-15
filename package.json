@@ -16,8 +16,10 @@
     "boxicons": "^2.1.4",
     "firebase": "^12.5.0",
     "gsap": "^3.12.5",
+    "pinia": "^2.3.1",
     "vue": "^3.4.29",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "vue-toastification": "^2.0.0-rc.1"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
