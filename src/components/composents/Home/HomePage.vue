@@ -5,6 +5,7 @@ import partners from './components/composents/partners.vue';
 import arrivals from './components/composents/Home/arrivals.vue';
 import footer1 from './components/helper/footer1.vue';
 import foote from './components/helper/footer.vue';
+import CartPage from './components/CartPage.vue';
 </script>
 
 <template>
@@ -15,6 +16,7 @@ import foote from './components/helper/footer.vue';
   <arrivals/>
   <footer1/>
   <foote/>
+  <CartPage/>
 </div>
 </template>
 

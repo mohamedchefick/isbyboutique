@@ -34,7 +34,6 @@
             </a>
         </div>
 
-        <!-- Button (grands écrans) -->
         <div class="hidden md:flex items-center gap-5 md:-mt-6">
             <button class="border-2 border-[#da9a90] text-[#da9a90] hover:bg-[#da9a90] duration-200 px-6 py-3 rounded-lg hover:text-white font-semibold">CONTACT ME</button>
         </div>

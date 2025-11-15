@@ -1,7 +1,7 @@
 <script setup>
 import heder from './components/helper/header.vue';
 import hero from './components/composents/Home/hero.vue';
-import partners from './components/composents/partners.vue';
+import partners from './components/composents/appPartners.vue';
 import arrivals from './components/composents/Home/appArrivals.vue';
 import footer1 from './components/helper/footer1.vue';
 import foote from './components/helper/footer.vue';
