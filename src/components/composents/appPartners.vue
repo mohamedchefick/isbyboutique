@@ -19,7 +19,6 @@
   import ysl from '../../images/ysl.png';
   import zara from '../../images/zara.png';
   
-  // Enregistre le plugin ScrollTrigger
   gsap.registerPlugin(ScrollTrigger);
   
   const partners = [

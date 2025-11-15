@@ -17,7 +17,7 @@
                     :ref="el => (arrivalRefs[index] = el)"
                     @click="openModal(p)" >
                     <img v-if="p.image" :src="p.image" alt="image produit"
-                        class="w-full h-64 object-cover rounded-lg shadow-md"
+                        class="w-full h-40 object-cover rounded-lg shadow-md"
                          />
 
                     <div class="flex justify-between items-center w-full mt-4">
@@ -29,10 +29,6 @@
                         </div>
 
                         <div class="flex items-center gap-2">
-                            <button @click.stop="addToCart(p)"
-                                class="bg-[#da9a90] text-white px-4 py-2 rounded-lg transition-transform hover:bg-[#814255] hover:scale-105">
-                                Ajouté au panier
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -53,10 +49,9 @@
             </button>
         </div>
     </div>
-    <!-- Modal -->
 <div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
   <div class="bg-white  rounded-xl p-6 max-w-lg w-full relative">
-    <button @click="closeModal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800">&times;</button>
+    <button @click="closeModal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl">✕</button>
 
     <img v-if="selectedProduct.image" :src="selectedProduct.image" alt="image produit" class="w-full h-64 object-cover rounded-lg mb-4" />
 
@@ -64,6 +59,12 @@
     <p class="text-gray-700  mb-2"><strong>Prix:</strong> {{ selectedProduct.price }} €</p>
     <p class="text-gray-700  mb-2"><strong>Date:</strong> {{ new Date(selectedProduct.createdAt?.seconds * 1000).toLocaleDateString() }}</p>
     <p class="text-gray-700 " v-html="selectedProduct.description"></p>
+
+    <button
+        @click="toggleCart(selectedProduct)"
+        :class="[isInCart(selectedProduct) ? 'bg-red-500 hover:bg-red-700' : 'bg-green-500 hover:bg-green-700', 'text-white px-4 py-2 rounded-lg mt-4']">
+        {{ isInCart(selectedProduct) ? 'Retiré du panier' : 'Ajouter au panier' }}
+    </button>
   </div>
 </div>
 
@@ -96,10 +97,6 @@ const errorMessage = ref('')
 const cartStore = useCartStore()
 const toast = useToast()
 
-const addToCart = (product) => {
-    cartStore.addToCart(product)
-    toast.success(`${product.name} ajouté au panier!`)
-}
 
 const updatePagination = () => {
     const start = (currentPage.value - 1) * limit
@@ -173,20 +170,35 @@ const setupScrollTrigger = () => {
     })
 }
 
-const showModal = ref(false)      // pour afficher/masquer le modal
-const selectedProduct = ref(null) // pour stocker le produit cliqué
+const showModal = ref(false)
+const selectedProduct = ref(null)
 
-// fonction pour ouvrir le modal
 const openModal = (product) => {
     selectedProduct.value = product
     showModal.value = true
 }
 
-// fonction pour fermer le modal
 const closeModal = () => {
     showModal.value = false
     selectedProduct.value = null
 }
+
+const isInCart = (product) => {
+    return cartStore.cart.some((item) => item.id === product.id)
+}
+
+const toggleCart = (product) => {
+    console.log('Toggling cart for product:', product);
+    if (isInCart(product)) {
+        console.log('Removing from cart:', product.id);
+        cartStore.removeFromCart(product.id);
+        toast.info(`${product.name} retiré du panier!`);
+    } else {
+        console.log('Adding to cart:', product);
+        cartStore.addToCart(product);
+        toast.success(`${product.name} ajouté au panier!`);
+    }
+};
 </script>
 
 <style scoped>

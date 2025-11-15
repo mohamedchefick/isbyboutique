@@ -4,7 +4,6 @@
         <div>
             <img :src="images.LOGO" alt="Logo" class="w-40 h-24 md:w-52 md:h-32 object-cover">
         </div>
-
         <!-- Menu burger (petits écrans) -->
         <div class="md:hidden">
             <button @click="toggleMenu" class="focus:outline-none">
@@ -13,7 +12,6 @@
                 </svg>
             </button>
         </div>
-
         <!-- Menu (grands écrans) -->
         <div class="hidden md:flex items-center gap-5 md:-mt-6">
             <a href="" class="relative group">
@@ -32,52 +30,62 @@
                 LIFESTYLE
                 <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
             </a>
+            <RouterLink to="/panier" class="relative group flex items-center gap-1">
+                PANIER
+                <span v-if="cartStore.cart.length > 0" class="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {{ cartStore.cart.length }}
+                </span>
+                <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
+            </RouterLink>
         </div>
-
         <div class="hidden md:flex items-center gap-5 md:-mt-6">
             <button class="border-2 border-[#da9a90] text-[#da9a90] hover:bg-[#da9a90] duration-200 px-6 py-3 rounded-lg hover:text-white font-semibold">CONTACT ME</button>
         </div>
-
         <!-- Menu déroulant (petits écrans) -->
-        <div v-if="menuOpen" class="md:hidden absolute top-16 left-0 w-full bg-white shadow-lg">
+        <div v-if="menuOpen" class="md:hidden absolute top-16 left-0 w-full bg-white shadow-lg z-50">
             <div class="flex flex-col items-center gap-3 py-4">
                 <a href="" class="w-full text-center py-2 relative group">
-                    CATALOGUE
+                    HOME
                     <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="" class="w-full text-center py-2 relative group">
-                    FASHION
+                    ARRIVAL
                     <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="" class="w-full text-center py-2 relative group">
-                    FAVOURITE
+                    PARTNERS
                     <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="" class="w-full text-center py-2 relative group">
                     LIFESTYLE
                     <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
                 </a>
+                <RouterLink to="/panier" class="w-full text-center py-2 relative group flex items-center justify-center gap-1">
+                    PANIER
+                    <span v-if="cartStore.cart.length > 0" class="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                        {{ cartStore.cart.length }}
+                    </span>
+                    <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
+                </RouterLink>
                 <button class="border-2 border-[#da9a90] text-[#da9a90] hover:bg-[#da9a90] duration-200 px-6 py-3 rounded-lg hover:text-white font-semibold">CONTACT ME</button>
             </div>
         </div>
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
 import LOGO from "@/images/logolbc.png";
+import { useCartStore } from '@/stores/cart';
+import { RouterLink } from 'vue-router';
 
-export default {
-    name: 'the-header',
-    data() {
-        return {
-            images: { LOGO },
-            menuOpen: false, // Gérer l'état du menu burger
-        };
-    },
-    methods: {
-        toggleMenu() {
-            this.menuOpen = !this.menuOpen;
-        },
-    },
+const cartStore = useCartStore();
+
+const images = ref({ LOGO });
+
+const menuOpen = ref(false);
+
+const toggleMenu = () => {
+    menuOpen.value = !menuOpen.value;
 };
 </script>

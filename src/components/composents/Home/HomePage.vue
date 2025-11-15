@@ -1,11 +1,10 @@
 <script setup>
-import heder from './components/helper/header.vue';
-import hero from './components/composents/Home/hero.vue';
-import partners from './components/composents/partners.vue';
-import arrivals from './components/composents/Home/arrivals.vue';
-import footer1 from './components/helper/footer1.vue';
-import foote from './components/helper/footer.vue';
-import CartPage from './components/CartPage.vue';
+import heder from '../../helper/appHeader.vue';
+import hero from './hero.vue';
+import partners from '../appPartners.vue';
+import arrivals from '../Home/appArrivals.vue';
+import footer1 from '../../helper/footer1.vue';
+import foote from '../../helper/footer.vue';
 </script>
 
 <template>
@@ -16,7 +15,6 @@ import CartPage from './components/CartPage.vue';
   <arrivals/>
   <footer1/>
   <foote/>
-  <CartPage/>
 </div>
 </template>
 
