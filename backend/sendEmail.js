@@ -2,6 +2,10 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import SibApiV3Sdk from "sib-api-v3-sdk";
+import dotenv from "dotenv"
+import process from "process";
+
+dotenv.config();
 
 const app = express();
 const PORT = 3001;
@@ -15,8 +19,8 @@ app.get("/", (req, res) => {
 
 const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 const apiKey = SibApiV3Sdk.ApiClient.instance.authentications['api-key'];
-apiKey.apiKey = "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";
-const senderEmail = "karylsoumaila1@gmail.com";
+apiKey.apiKey = process.env.BREVO_API_KEY;;
+const senderEmail = process.env.SENDER_EMAIL;
 
 app.post("/send-email", async (req, res) => {
   const { nom, prenom, email } = req.body;
