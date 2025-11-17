@@ -27,7 +27,6 @@
                             </h3>
                             <p class="text-gray-600 " v-text="truncateHtmlToText(p.description, 100)"></p>
                         </div>
-                        <!-- Bouton flèche à gauche — clique uniquement sur le bouton ouvre la page de détails -->
                         <button
                             @click.stop="goToProductDetails(p.id)"
                             class="bg-[#da9a90] text-white px-4 py-2 rounded-lg transition-transform hover:bg-[#814255] hover:scale-105 mr-3">

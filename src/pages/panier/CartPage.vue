@@ -1,16 +1,16 @@
 <template>
-    <div class="cart-page min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div class="animate-fadeIn min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
         <!-- En-tête moderne -->
         <div class="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
                 <div class="flex items-center justify-between">
                     <button @click="goBack" class="text-[#da9a90] hover:text-[#c88980] font-semibold flex items-center gap-2 transition-colors group">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                        </svg>
+                        <div class="h-10 text-2xl text-[#da9a90]">
+                            ←
+                        </div>
                         <span class="hidden sm:inline">Continuer mes achats</span>
                     </button>
-                    <!--  -->
+                    
                     <div class="flex items-center gap-3 sm:gap-4">
                         <div class="bg-[#da9a90]/10 p-2 sm:p-3 rounded-xl">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 text-[#da9a90]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -138,7 +138,7 @@
                             </div>
                         </div>
 
-                        <button @click="checkout" 
+                        <button @click="placeOrder" 
                                 class="w-full bg-[#da9a90] text-white py-4 rounded-xl hover:bg-[#c88980] transition-all duration-300 font-bold text-lg mb-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                             Passer la commande
                         </button>
@@ -256,55 +256,11 @@ const applyPromo = () => {
     }
 };
 
-const checkout = () => {
-    toast.success('Redirection vers le paiement...');
+function placeOrder() {
+    router.push({name: 'order'})
 };
 
 const goBack = () => {
     router.back();
 };
 </script>
-
-<style scoped>
-.cart-page {
-    animation: fadeIn 0.5s ease-in;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-button {
-    transition: all 0.3s ease;
-}
-
-button:active {
-    transform: scale(0.97);
-}
-
-/* Animation pour les items qui disparaissent */
-.v-enter-active,
-.v-leave-active {
-    transition: all 0.3s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-    opacity: 0;
-    transform: translateX(-20px);
-}
-</style>
