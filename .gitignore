@@ -29,3 +29,5 @@ coverage
 
 *.tsbuildinfo
 backend/.history/
+backend/.history/
+backend/.env
