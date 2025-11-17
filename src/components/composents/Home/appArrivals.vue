@@ -1,37 +1,33 @@
 <template>
-    <div :class="[isDarkMode ? 'dark' : '', 'arrivals-container md:mx-10 my-10']" ref="arrivalsContainer">
+    <div :class="[isDarkMode ? 'dark' : '', 'arrivals-container mx-5 my-10']" ref="arrivalsContainer">
         <h2 class="text-center text-3xl font-bold mb-8">Nouvelles Arrivées</h2>
 
         <div class="flex flex-wrap justify-between items-center mb-4 gap-4">
             <input v-model="searchQuery" type="text" placeholder="Recherchez des produits"
                 class="w-full md:w-1/3 p-2 border border-gray-300 rounded-lg" />
+
         </div>
 
-        <div class="bg-white rounded-lg">
+        <div class="bg-white  p-6 rounded-lg shadow">
             <div v-if="errorMessage" class="text-red-500 text-center mb-4">{{ errorMessage }}</div>
 
-            <div v-if="paginatedProducts.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div v-if="paginatedProducts.length" class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div v-for="(p, index) in paginatedProducts" :key="p.id"
-                    class="arrival-item flex flex-col items-center bg-white shadow-2xl rounded-xl p-3 cursor-pointer "
+                    class="arrival-item flex flex-col items-center bg-white  rounded-xl p-3 cursor-pointer"
                     :ref="el => (arrivalRefs[index] = el)"
-                    @click="goToProductDetails(p.id)" >
+                    @click="openModal(p)" >
                     <img v-if="p.image" :src="p.image" alt="image produit"
-                        class="w-full h-64 object-cover rounded-lg shadow-md"
+                        class="w-full h-40 object-cover rounded-lg shadow-md"
                          />
 
-                    <div class="flex items-start w-full mt-4">
-
-                        <div class="flex-1">
-                            <h3 class="text-lg font-semibold text-green-700 " :title="p.name">
-                                {{ truncateText(p.name, 40) }}
+                    <div class="flex justify-between items-center w-full mt-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-green-700 ">
+                                {{ p.name }}
                             </h3>
-                            <p class="text-gray-600 " v-text="truncateHtmlToText(p.description, 100)"></p>
+                            <p class="text-gray-600 " v-html="p.description"></p>
                         </div>
-                        <button
-                            @click.stop="goToProductDetails(p.id)"
-                            class="bg-[#da9a90] text-white px-4 py-2 rounded-lg transition-transform hover:bg-[#814255] hover:scale-105 mr-3">
-                            &rarr;
-                        </button>
+
                         <div class="flex items-center gap-2">
                         </div>
                     </div>
@@ -53,19 +49,38 @@
             </button>
         </div>
     </div>
+<div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white  rounded-xl p-6 max-w-lg w-full relative">
+    <button @click="closeModal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl">✕</button>
+
+    <img v-if="selectedProduct.image" :src="selectedProduct.image" alt="image produit" class="w-full h-64 object-cover rounded-lg mb-4" />
+
+    <h2 class="text-2xl font-bold text-green-700 mb-2">{{ selectedProduct.name }}</h2>
+    <p class="text-gray-700  mb-2"><strong>Prix:</strong> {{ selectedProduct.price }} €</p>
+    <p class="text-gray-700  mb-2"><strong>Date:</strong> {{ new Date(selectedProduct.createdAt?.seconds * 1000).toLocaleDateString() }}</p>
+    <p class="text-gray-700 " v-html="selectedProduct.description"></p>
+
+    <button
+        @click="toggleCart(selectedProduct)"
+        :class="[isInCart(selectedProduct) ? 'bg-red-500 hover:bg-red-700' : 'bg-green-500 hover:bg-green-700', 'text-white px-4 py-2 rounded-lg mt-4']">
+        {{ isInCart(selectedProduct) ? 'Retiré du panier' : 'Ajouter au panier' }}
+    </button>
+  </div>
+</div>
+
 </template>
 
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue'
-import { useRouter } from 'vue-router'
 import { db } from '../../../firebase'
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useCartStore } from '@/stores/cart'
+import { useToast } from 'vue-toastification'
 
 
 gsap.registerPlugin(ScrollTrigger)
-const router = useRouter()
 
 const products = ref([])
 const filteredProducts = ref([])
@@ -79,29 +94,9 @@ const limit = 9
 const isDarkMode = ref(false)
 const errorMessage = ref('')
 
-const goToProductDetails = (productId) => {
-  router.push({ name: 'ProductDetails', params: { id: productId } })
-}
+const cartStore = useCartStore()
+const toast = useToast()
 
-// Tronque un texte simple (titre, etc.)
-const truncateText = (text, limit) => {
-    if (!text) return ''
-    return text.length > limit ? text.slice(0, limit) + '...' : text
-}
-
-// Convertit HTML en texte brut puis tronque (pour la description qui est en HTML)
-const truncateHtmlToText = (html, limit) => {
-    if (!html) return ''
-    if (typeof document === 'undefined') {
-        // fallback: enlever quelques balises basiques si exécuté côté serveur
-        const plain = html.replace(/<[^>]+>/g, '')
-        return plain.length > limit ? plain.slice(0, limit) + '...' : plain
-    }
-    const tmp = document.createElement('div')
-    tmp.innerHTML = html
-    const text = tmp.textContent || tmp.innerText || ''
-    return text.length > limit ? text.slice(0, limit) + '...' : text
-}
 
 const updatePagination = () => {
     const start = (currentPage.value - 1) * limit
@@ -174,12 +169,42 @@ const setupScrollTrigger = () => {
         }
     })
 }
+
+const showModal = ref(false)
+const selectedProduct = ref(null)
+
+const openModal = (product) => {
+    selectedProduct.value = product
+    showModal.value = true
+}
+
+const closeModal = () => {
+    showModal.value = false
+    selectedProduct.value = null
+}
+
+const isInCart = (product) => {
+    return cartStore.cart.some((item) => item.id === product.id)
+}
+
+const toggleCart = (product) => {
+    console.log('Toggling cart for product:', product);
+    if (isInCart(product)) {
+        console.log('Removing from cart:', product.id);
+        cartStore.removeFromCart(product.id);
+        toast.info(`${product.name} retiré du panier!`);
+    } else {
+        console.log('Adding to cart:', product);
+        cartStore.addToCart(product);
+        toast.success(`${product.name} ajouté au panier!`);
+    }
+};
 </script>
 
 <style scoped>
 .arrivals-container {
     padding: 20px;
-    background-color: #fff;
+    background-color: #f4f4f4;
     border-radius: 20px;
 }
 
