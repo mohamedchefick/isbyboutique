@@ -7,11 +7,19 @@ dns.lookup = (hostname, options, callback) => {
     options = {}
   }
 
-  if (hostname === 'surge.surge.sh' || hostname === 'surge.sh') {
+  if (
+    hostname === 'surge.surge.sh' ||
+    hostname === 'surge.sh' ||
+    hostname === 'api.sendinblue.com' ||
+    hostname === 'api.brevo.com'
+  ) {
     console.log(`Monkey-patching DNS for ${hostname}`)
     console.log('Options:', options)
 
-    const ip = hostname === 'surge.surge.sh' ? '192.241.214.148' : '138.197.235.123'
+    let ip
+    if (hostname === 'surge.surge.sh') ip = '192.241.214.148'
+    else if (hostname === 'surge.sh') ip = '138.197.235.123'
+    else ip = '141.101.90.106' // api.sendinblue.com / api.brevo.com
 
     if (options && options.all) {
       process.nextTick(() => callback(null, [{ address: ip, family: 4 }]))

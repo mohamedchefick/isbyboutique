@@ -33,13 +33,13 @@
   
           <div>
             <label class="block font-medium text-gray-700 mb-1">Nom</label>
-            <input v-model="form.nom" type="text"
+            <input v-model="form.nom" type="text" placeholder="Doe"
                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-[#da9a90] focus:border-[#da9a90] outline-none">
           </div>
   
           <div>
             <label class="block font-medium text-gray-700 mb-1">Prénom</label>
-            <input v-model="form.prenom" type="text"
+            <input v-model="form.prenom" type="text" placeholder="John"
                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-[#da9a90] focus:border-[#da9a90] outline-none">
           </div>
   
@@ -51,7 +51,7 @@
   
           <div>
             <label class="block font-medium text-gray-700 mb-1">Email</label>
-            <input v-model="form.email" type="email"
+            <input v-model="form.email" type="email" placeholder="john.doe@example.com"
                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-[#da9a90] focus:border-[#da9a90] outline-none">
           </div>
   
@@ -68,9 +68,11 @@
   import { ref, computed } from 'vue';
   import { useCartStore } from '@/stores/cart';
   import { useRouter } from 'vue-router';
+  import { useToast } from 'vue-toastification';
   
   const cartStore = useCartStore();
   const router = useRouter();
+  const toast = useToast();
   
   const totalItems = computed(() =>
       cartStore.cart.reduce((total, item) => total + (item.quantity || 1), 0)
@@ -86,7 +88,7 @@
   // Fonction pour envoyer les infos au backend et envoyer l'email via Brevo
   async function saveClientInfo() {
     if (!form.value.nom || !form.value.prenom || !form.value.email) {
-      alert("Veuillez remplir au moins le nom, prénom et email.");
+      toast.error("Veuillez remplir au moins le nom, prénom et email.");
       return;
     }
   
@@ -96,17 +98,17 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...form.value,
-          cart: cartStore.cart,
+          cartItems: cartStore.cart, // Use cartItems to match backend expectation
           totalPrice: cartStore.totalPrice
         })
       });
   
       if (!response.ok) throw new Error("Erreur serveur");
   
-      alert("Informations enregistrées et email envoyé !");
+      toast.success("Informations enregistrées et email envoyé !");
     } catch (error) {
       console.error(error);
-      alert("Erreur lors de l'envoi de l'email.");
+      toast.error("Erreur lors de l'envoi de l'email.");
     }
   }
   
