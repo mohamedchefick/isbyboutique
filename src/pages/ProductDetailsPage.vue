@@ -65,7 +65,7 @@
               <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl sm:rounded-2xl p-6 border-2 border-green-200">
                 <p class="text-green-700 text-xs sm:text-sm font-bold uppercase tracking-wider mb-2">Prix</p>
                 <p class="text-4xl sm:text-5xl font-black text-green-600">
-                  {{ product.price }} <span class="text-2xl sm:text-3xl">€</span>
+                  {{ product.price }} <span class="text-2xl sm:text-3xl">F CFA</span>
                 </p>
               </div>
 
@@ -169,7 +169,7 @@
                   <h3 class="font-bold text-gray-900 text-base sm:text-lg lg:text-xl mb-2 sm:mb-3 line-clamp-2">
                     {{ similarProduct.name }}
                   </h3>
-                  <p class="text-green-600 font-black text-xl sm:text-2xl">{{ similarProduct.price }} €</p>
+                  <p class="text-green-600 font-black text-xl sm:text-2xl">{{ similarProduct.price }} F CFA</p>
                 </div>
               </div>
             </div>
