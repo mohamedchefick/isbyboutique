@@ -1,7 +1,5 @@
 <template>
     <div :class="[isDarkMode ? 'dark' : '', 'arrivals-container md:mx-10 my-10']" ref="arrivalsContainer">
-        <h2 class="text-center text-3xl font-bold mb-8">Nouvelles Arrivées</h2>
-
         <div class="flex flex-wrap justify-between items-center mb-4 gap-4">
             <input v-model="searchQuery" type="text" placeholder="Recherchez des produits"
                 class="w-full md:w-1/3 p-2 border border-gray-300 rounded-lg" />

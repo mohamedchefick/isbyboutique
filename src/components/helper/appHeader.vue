@@ -40,11 +40,6 @@
                     <span
                         class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="" class="w-full text-center py-2 relative group">
-                    ARRIVAL
-                    <span
-                        class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#da9a90] transition-all duration-300 group-hover:w-full"></span>
-                </a>
                 <RouterLink to="/" class="w-full text-center py-2 relative group">
                     ACCUEIL
                     <span

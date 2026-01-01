@@ -30,7 +30,7 @@
         </div>
         <hr class="mt-4">
         <div class="mt-6 text-center text-sm">
-            <p>&copy; 2024 LABOUTIQUE_CHINE. Tous droits réservés.</p>
+            <p>&copy; 2025 LABOUTIQUE_CHINE. Tous droits réservés.</p>
         </div>
     </footer>
 </template>
