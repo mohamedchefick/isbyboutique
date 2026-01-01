@@ -12,18 +12,18 @@
             <div class="flex-1 text-left md:text-center mt-4 md:mt-0">
     <p class="text-lg font-semibold">Suivez-nous</p>
     <div class="flex flex-col justify-between items-center h-full mt-2 gap-4">
-        <div class="flex gap-2 items-center">
+        <a href="https://www.facebook.com/profile.php?id=61570139615872&mibextid=wwXIfr&rdid=d4P9XY0Z7P38jUTp&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17csva2caz%2F%3Fmibextid%3DwwXIfr#" target="_blank" rel="noopener noreferrer" class="flex gap-2 items-center hover:opacity-80 transition-opacity">
             <box-icon type='logo' name='facebook' class="bg-[#da9a90] rounded-md"></box-icon>
             <span>Facebook</span>
-        </div>
-        <div class="flex gap-2 items-center">
+        </a>
+        <a href="https://api.whatsapp.com/message/HKOTC2MUG6VGD1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer" class="flex gap-2 items-center hover:opacity-80 transition-opacity">
             <box-icon name='whatsapp' type='logo' color="#000" class="bg-[#da9a90] rounded-md"></box-icon>
             <span>WhatsApp</span>
-        </div>
-        <div class="flex gap-2 items-center">
+        </a>
+        <a href="https://www.instagram.com/produits_chine_gros_detail?igsh=Y3pramNmNW5iOGI%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="flex gap-2 items-center hover:opacity-80 transition-opacity">
             <box-icon type='logo' name='instagram-alt' class="bg-[#da9a90] rounded-md"></box-icon>
             <span>Instagram</span>
-        </div>
+        </a>
     </div>
 </div>
 

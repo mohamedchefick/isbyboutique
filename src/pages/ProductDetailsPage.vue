@@ -59,7 +59,7 @@
             </h1>
 
             <!-- Grille d'informations clés -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
               
               <!-- Prix -->
               <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl sm:rounded-2xl p-6 border-2 border-green-200">
@@ -70,12 +70,12 @@
               </div>
 
               <!-- Stock -->
-              <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl sm:rounded-2xl p-6 border-2 border-gray-200">
+              <!-- <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl sm:rounded-2xl p-6 border-2 border-gray-200">
                 <p class="text-gray-700 text-xs sm:text-sm font-bold uppercase tracking-wider mb-2">Disponibilité</p>
                 <p :class="[product.stock > 0 ? 'text-green-600' : 'text-red-600', 'text-xl sm:text-2xl font-bold']">
                   {{ product.stock > 0 ? `${product.stock} unités` : 'Rupture de stock' }}
                 </p>
-              </div>
+              </div> -->
 
               <!-- Date d'ajout -->
               <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl sm:rounded-2xl p-6 border-2 border-blue-200 sm:col-span-2 lg:col-span-1">
